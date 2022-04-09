@@ -7,7 +7,7 @@ using JWTShowcase.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Models;
-using Services;
+using Services.Interfaces;
 
 public class PostsController : ApiController
 {

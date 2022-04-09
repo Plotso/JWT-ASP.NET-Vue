@@ -1,7 +1,7 @@
 using JWTShowcase.Extensions;
 using JWTShowcase.Posts.Data;
-using JWTShowcase.Posts.Data.Models;
 using JWTShowcase.Posts.Services;
+using JWTShowcase.Posts.Services.Interfaces;
 using JWTShowcase.Services;
 
 var builder = WebApplication.CreateBuilder(args);

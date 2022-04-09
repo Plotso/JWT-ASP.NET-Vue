@@ -3,7 +3,7 @@
 using JWTShowcase.Services;
 using Microsoft.EntityFrameworkCore;
 using Models;
-using Services;
+using Services.Interfaces;
 
 public class PostDataSeeder : IDataSeeder
 {

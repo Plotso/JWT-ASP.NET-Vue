@@ -1,4 +1,4 @@
-﻿namespace JWTShowcase.Posts.Services;
+﻿namespace JWTShowcase.Posts.Services.Interfaces;
 
 using Data.Models;
 using JWTShowcase.Data;

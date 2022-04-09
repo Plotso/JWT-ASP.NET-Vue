@@ -1,8 +1,7 @@
-﻿namespace JWTShowcase.Posts.Services;
+﻿namespace JWTShowcase.Posts.Services.Interfaces;
 
 using Data.Models;
 using JWTShowcase.Data;
-using Models;
 
 public interface IAuthorsService : IDataService<Author>
 {

@@ -1,4 +1,4 @@
-﻿namespace JWTShowcase.Posts.Models;
+﻿namespace JWTShowcase.Posts.Gateway.Models.Posts;
 
 using JWTShowcase.Models;
 

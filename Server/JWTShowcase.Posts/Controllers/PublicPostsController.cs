@@ -7,7 +7,7 @@ using JWTShowcase.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Models;
-using Services;
+using Services.Interfaces;
 
 public class PublicPostsController : ApiController
 {
@@ -30,11 +30,11 @@ public class PublicPostsController : ApiController
     }
 
     [HttpGet]
-    public async Task<PublicPostsOutputModel> GetPublicPosts() => new(await _publicPosts.GetAll());
+    public async Task<PublicPostsOutputModel> GetAll() => new(await _publicPosts.GetAll());
 
     [HttpPost]
     [Authorize]
-    public async Task<ActionResult<int>> AddPublic(PublicPostInputModel input)
+    public async Task<ActionResult<int>> Add(PublicPostInputModel input)
     {
         try
         {
@@ -74,7 +74,7 @@ public class PublicPostsController : ApiController
     [HttpPut]
     [Authorize]
     [Route(Id)]
-    public async Task<ActionResult> EditPublicPost(int id, PublicPostInputModel input)
+    public async Task<ActionResult> Edit(int id, PublicPostInputModel input)
     {
         var post = await _publicPosts.Get(id);
         if (post == null)
@@ -96,7 +96,7 @@ public class PublicPostsController : ApiController
     [HttpDelete]
     [Authorize]
     [Route(Id)]
-    public async Task<ActionResult<bool>> DeletePublicPost(int id)
+    public async Task<ActionResult<bool>> Delete(int id)
     {
         var post = await _publicPosts.Get(id);
         if (post == null)

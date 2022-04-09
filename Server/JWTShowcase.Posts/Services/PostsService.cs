@@ -3,7 +3,9 @@ namespace JWTShowcase.Posts.Services;
 using AutoMapper;
 using Data;
 using Data.Models;
+using Interfaces;
 using JWTShowcase.Data;
+using JWTShowcase.Models;
 using Microsoft.EntityFrameworkCore;
 using Models;
 
