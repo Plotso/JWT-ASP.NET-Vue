@@ -7,4 +7,6 @@ using Models;
 public interface IAuthorsService : IDataService<Author>
 {
     Task<Author> GetByUserId(string userId);
+
+    Task<Author> GetSystemUser();
 }

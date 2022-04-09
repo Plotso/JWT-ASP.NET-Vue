@@ -29,6 +29,9 @@ class IdentityService : IIdentityService
 
     public async Task<Result<User>> Register(UserInputModel userInput)
     {
+        if (userInput.Email == Constants.SystemUser)
+            return Result<User>.Failure(new []{ $"{Constants.SystemUser} is preserved username for the system."});
+        
         var user = new User
         {
             Email = userInput.Email,
