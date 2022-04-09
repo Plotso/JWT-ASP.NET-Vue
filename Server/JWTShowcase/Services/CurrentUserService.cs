@@ -15,8 +15,12 @@ public class CurrentUserService : ICurrentUserService
             throw new InvalidOperationException("Request requires an authenticated user.");
 
         UserId = _user.FindFirstValue(ClaimTypes.NameIdentifier);
+        Username = _user.Identity?.Name;
     }
     
     public string UserId { get; }
+    
+    public string? Username { get; set; }
+    
     public bool IsAdministrator => _user.IsInRole(Constants.AdministratorRoleName);
 }

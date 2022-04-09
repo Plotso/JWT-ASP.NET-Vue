@@ -12,6 +12,11 @@ using Services;
 
 public static class ApplicationBuilderExtensions
 {
+    public static IApplicationBuilder UseJwtHeaderAuthentication(this IApplicationBuilder app)
+        => app
+            .UseMiddleware<JwtAuthenticationMiddleware>()
+            .UseAuthentication();
+    
     public static IApplicationBuilder UseWebService(this IApplicationBuilder app, IWebHostEnvironment env, bool swaggerEnabled)
     {
         if (env.IsDevelopment())
@@ -45,11 +50,6 @@ public static class ApplicationBuilderExtensions
 
         return app;
     }
-
-    public static IApplicationBuilder UseJwtHeaderAuthentication(this IApplicationBuilder app)
-        => app
-            .UseMiddleware<JwtAuthenticationMiddleware>()
-            .UseAuthentication();
 
     public static IApplicationBuilder SeedData(
         this IApplicationBuilder app)
