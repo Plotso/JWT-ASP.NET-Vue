@@ -8,6 +8,7 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["JWTShowcase.Identity/JWTShowcase.Identity.csproj", "JWTShowcase.Identity/"]
+COPY ["JWTShowcase/JWTShowcase.csproj", "JWTShowcase/"]
 RUN dotnet restore "JWTShowcase.Identity/JWTShowcase.Identity.csproj"
 COPY . .
 WORKDIR "/src/JWTShowcase.Identity"

@@ -1,15 +1,21 @@
 using JWTShowcase.Extensions;
+using JWTShowcase.Identity.Data;
+using JWTShowcase.Identity.Extensions;
+using JWTShowcase.Identity.Services;
+using JWTShowcase.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services
+    .AddWebService<IdentityDbContext>(builder.Configuration, swaggerEnabled: true)
+    .AddUserStorage()
+    .AddTransient<IDataSeeder, IdentitySeeder>()
+    .AddTransient<IIdentityService, IdentityService>()
+    .AddTransient<ITokenGenerator, TokenGenerator>();
 
 var app = builder.Build();
-app.UseWebService(app.Environment, swaggerEnabled: true);
+app
+    .UseWebService(app.Environment, swaggerEnabled: true)
+    .SeedData();
 
 app.Run();
