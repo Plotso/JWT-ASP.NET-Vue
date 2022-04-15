@@ -83,7 +83,7 @@ public class PostsService : DataService<Post>, IPostsService
     private IQueryable<Post> GetPostsQuery(
         PostsQuery query, int? postId = null)
     {
-        var dataQuery = this.All();
+        var dataQuery = All();
 
         if (postId.HasValue)
         {

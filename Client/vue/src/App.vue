@@ -6,6 +6,16 @@
   <router-view/>
 </template>
 
+<script>
+export default {
+  mounted () {
+    document.title = "JWTShowcase"
+    this.$store.dispatch('post/fetchPublicPosts')
+    this.$store.dispatch('post/fetchPosts')
+  }
+}
+</script>
+
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
