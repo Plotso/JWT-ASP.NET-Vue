@@ -82,7 +82,8 @@ public class PostDataSeeder : IDataSeeder
                     await _commentsService.Save(new Comment
                     {
                         Author = author,
-                        Content = "This comments is the first member of all comments across the site. We're very happy to see you here in our minimal microservices solution. Please share you thoughts in the comments. We hope that you enjoy your time here! :)"
+                        Content = "This comments is the first member of all comments across the site. We're very happy to see you here in our minimal microservices solution. Please share you thoughts in the comments. We hope that you enjoy your time here! :)",
+                        Post = post
                     });
                     _logger.LogInformation("Comment seeded");
                 }

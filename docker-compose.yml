@@ -1,0 +1,58 @@
+version: "3.8"
+
+services:
+
+    data:
+        container_name: sqlserver
+        image: mcr.microsoft.com/mssql/server:2019-latest
+        ports: 
+            - "1433:1433"
+        environment:
+            - ACCEPT_EULA=Y
+            - SA_PASSWORD=jwtSup3rStrongPass1111
+        volumes: 
+            - sqldata:/var/opt/mssql 
+        networks: 
+            - jwtshowcase-network
+
+    identity:
+        container_name: identity
+        build:
+            context: ./Server
+            dockerfile: ./JWTShowcase.Identity/Dockerfile
+        ports: 
+            - "5003:80"
+        env_file: Server/JWTShowcase/Common.env
+        environment:
+            - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=JWTShowcaseIdentityDatabase;User Id=sa; Password=jwtSup3rStrongPass1111!@;MultipleActiveResultSets=true
+        restart: on-failure
+        volumes:
+            - ./.aspnet/identity/DataProtection-Keys:/root/.aspnet/DataProtection-Keys
+        networks: 
+            - jwtshowcase-network
+        depends_on:
+            - data
+            
+    posts:
+        container_name: posts
+        build:
+            context: ./Server
+            dockerfile: ./JWTShowcase.Posts/Dockerfile
+        ports: 
+            - "5001:80"
+        env_file: Server/JWTShowcase/Common.env
+        environment:
+            - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=JWTShowcasePostsDatabase;User Id=sa; Password=yourStrongPassword12!@;MultipleActiveResultSets=true
+        restart: on-failure
+        volumes:
+            - ./.aspnet/posts/DataProtection-Keys:/root/.aspnet/DataProtection-Keys
+        networks: 
+            - jwtshowcase-network
+        depends_on:
+            - data
+
+networks:
+    jwtshowcase-network:
+
+volumes:
+    sqldata:
