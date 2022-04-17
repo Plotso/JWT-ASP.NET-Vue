@@ -93,21 +93,18 @@ public class PostsController : ApiController
     [Route(Id)]
     public async Task<ActionResult> Edit(int id, PostInputModel input)
     {
-        var post = await _posts.Get(id);
+        var post = await _posts.GetDbPost(id);
         if (post == null)
             return BadRequest(Result.Failure($"No post found with {id}"));
         
         var author = await _authors.GetByUserId(_currentUser.UserId);
-        if (!_currentUser.IsAdministrator || author == null || post.AuthorUsername != author.Username)
+        if (!_currentUser.IsAdministrator && (author == null || post.Author.Username != author.Username))
             return BadRequest(Result.Failure("Only admins and post author can edit its content!"));
         
-        var postEntity = new Post
-        {
-            Title = input.Title,
-            Content = input.Content
-        };
+        post.Title = input.Title;
+        post.Content = input.Content;
 
-        await _posts.Save(postEntity);
+        await _posts.Save(post);
 
         return Result.Success;
     }

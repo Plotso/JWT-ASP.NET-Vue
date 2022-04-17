@@ -27,6 +27,23 @@ public class PostsDbContext : DbContext
     
     public DbSet<Author> Authors { get; set; }
 
+    public override int SaveChanges() => SaveChanges(true);
+
+    public override int SaveChanges(bool acceptAllChangesOnSuccess)
+    {
+        ApplyAuditInfoRules();
+        return base.SaveChanges(acceptAllChangesOnSuccess);
+    }
+
+    public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default) 
+        => SaveChangesAsync(true, cancellationToken);
+
+    public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default)
+    {
+        ApplyAuditInfoRules();
+        return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
+    }
+
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);

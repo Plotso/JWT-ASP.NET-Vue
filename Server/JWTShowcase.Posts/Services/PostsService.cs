@@ -38,6 +38,9 @@ public class PostsService : DataService<Post>, IPostsService
             .ProjectTo<PostOutputModel>(All().Where(p => p.Id == id))
             .SingleOrDefaultAsync();
 
+    public async Task<Post> GetDbPost(int id)
+        => await All().SingleOrDefaultAsync(p => p.Id == id);
+
     public async Task<bool> Delete(int id)
     {
         var post = await Data.FindAsync<Post>(id);

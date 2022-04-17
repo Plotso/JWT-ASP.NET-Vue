@@ -83,20 +83,17 @@ public class CommentsController : ApiController
     [Route(Id)]
     public async Task<ActionResult> Edit(int id, CommentInputModel input)
     {
-        var comment = await _comments.Get(id);
+        var comment = await _comments.GetDbComment(id);
         if (comment == null)
             return BadRequest(Result.Failure($"No comment found with {id}"));
         
-        var author = await _authors.GetByUserId(_currentUser.UserId);
-        if (!_currentUser.IsAdministrator || author == null || comment.AuthorUsername != author.Username)
+        var currentAuthor = await _authors.GetByUserId(_currentUser.UserId);
+        if (!_currentUser.IsAdministrator && (currentAuthor == null || comment.Author.Username != currentAuthor.Username))
             return BadRequest(Result.Failure("Only admins and comments author can edit its content!"));
         
-        var commentEntry = new Comment()
-        {
-            Content = input.Content
-        };
+        comment.Content = input.Content;
 
-        await _comments.Save(commentEntry);
+        await _comments.Save(comment);
 
         return Result.Success;
     }

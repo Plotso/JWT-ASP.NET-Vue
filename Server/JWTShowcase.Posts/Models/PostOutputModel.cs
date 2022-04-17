@@ -3,4 +3,19 @@
 using Data.Models;
 using JWTShowcase.Models;
 
-public record PostOutputModel(int Id, string Title, string Content, string AuthorUsername, DateTime CreatedOn, DateTime ModifiedOn, IEnumerable<CommentOutputModel> Comments) : IMapFrom<Post>;
+public record PostOutputModel : IMapFrom<Post>
+{
+    public int Id { get; init; }
+    
+    public string Title { get; init; }
+
+    public string Content { get; init; }
+
+    public string AuthorUsername { get; init; }
+    
+    public DateTime CreatedOn { get; init; }
+    
+    public DateTime ModifiedOn { get; init; }
+    
+    public IEnumerable<CommentOutputModel> Comments { get; init; }
+}

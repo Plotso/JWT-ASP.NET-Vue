@@ -76,19 +76,16 @@ public class PublicPostsController : ApiController
     [Route(Id)]
     public async Task<ActionResult> Edit(int id, PublicPostInputModel input)
     {
-        var post = await _publicPosts.Get(id);
+        var post = await _publicPosts.GetDbPublicPost(id);
         if (post == null)
             return BadRequest(Result.Failure($"No post found with {id}"));
         
         if (!_currentUser.IsAdministrator)
             return BadRequest(Result.Failure("Only admins can edit public posts content!"));
         
-        var postEntity = new PublicPost()
-        {
-            Content = input.Content
-        };
+        post.Content = input.Content;
 
-        await _publicPosts.Save(postEntity);
+        await _publicPosts.Save(post);
 
         return Result.Success;
     }
