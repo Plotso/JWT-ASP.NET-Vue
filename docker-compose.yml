@@ -24,7 +24,7 @@ services:
             - "5003:80"
         env_file: Server/JWTShowcase/Common.env
         environment:
-            - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=JWTShowcaseIdentityDatabase;User Id=sa; Password=jwtSup3rStrongPass1111!@;MultipleActiveResultSets=true
+            - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=JWTShowcaseIdentityDatabase;User Id=sa; Password=jwtSup3rStrongPass1111;MultipleActiveResultSets=true
         restart: on-failure
         volumes:
             - ./.aspnet/identity/DataProtection-Keys:/root/.aspnet/DataProtection-Keys
@@ -42,7 +42,25 @@ services:
             - "5001:80"
         env_file: Server/JWTShowcase/Common.env
         environment:
-            - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=JWTShowcasePostsDatabase;User Id=sa; Password=yourStrongPassword12!@;MultipleActiveResultSets=true
+            - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=JWTShowcasePostsDatabase;User Id=sa; Password=jwtSup3rStrongPass1111;MultipleActiveResultSets=true
+        restart: on-failure
+        volumes:
+            - ./.aspnet/posts/DataProtection-Keys:/root/.aspnet/DataProtection-Keys
+        networks: 
+            - jwtshowcase-network
+        depends_on:
+            - data
+            
+    posts-gateway:
+        container_name: posts-gateway
+        build:
+            context: ./Server
+            dockerfile: ./JWTShowcase.Posts.Gateway/Dockerfile
+        ports: 
+            - "5002:80"
+        env_file: Server/JWTShowcase/Common.env
+        environment:
+            - ASPNETCORE_ENVIRONMENT=Docker
         restart: on-failure
         volumes:
             - ./.aspnet/posts/DataProtection-Keys:/root/.aspnet/DataProtection-Keys
