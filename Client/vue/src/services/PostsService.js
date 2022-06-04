@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const postsApi = axios.create({ //ToDo: Public posts   && 1 more for posts && 1 more for comments
-    baseURL: process.env.JWTSHOWCASE_POSTS_GATEWAY_ADDRESS,
+    baseURL: `https://localhost:7077`,//process.env.JWTSHOWCASE_POSTS_GATEWAY_ADDRESS_DOCKER,
     withCredentials: false, // This is the default
     headers: {
       Accept: 'application/json',
@@ -10,7 +10,7 @@ const postsApi = axios.create({ //ToDo: Public posts   && 1 more for posts && 1 
 })
 
 const authApi = axios.create({  //ToDo: Auth
-    baseURL: process.env.JWTSHOWCASE_AUTH_API_ADDRESS,
+    baseURL: process.env.JWTSHOWCASE_AUTH_API_ADDRESS_DOCKER,
     withCredentials: false, // This is the default
     headers: {
         'Content-Type' : 'application/x-www-form-urlencoded', 
@@ -35,6 +35,7 @@ export default{
 
     // Posts
     getPublicPosts(){
+        console.log(process.env.JWTSHOWCASE_POSTS_GATEWAY_ADDRESS_DOCKER);
         return postsApi.get('/PublicPosts/GetAll'); //ToDo: Public posts
     },
     getPosts(accessToken){ //ToDo: Add query logic

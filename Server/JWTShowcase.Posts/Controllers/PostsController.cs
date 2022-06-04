@@ -32,6 +32,7 @@ public class PostsController : ApiController
 
     [HttpGet]
     [Authorize]
+    [Route(nameof(GetAll))]
     public async Task<ActionResult<PostsOutputModel>> GetAll([FromQuery] PostsQuery query)
     {
         var posts = await _posts.Query(query);

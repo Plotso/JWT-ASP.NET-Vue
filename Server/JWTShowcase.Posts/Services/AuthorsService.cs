@@ -19,6 +19,8 @@ public class AuthorsService : DataService<Author>, IAuthorsService
             .Where(a => a.UserId == userId)
             .SingleOrDefaultAsync();
 
-    public async Task<Author> GetSystemUser() =>
-        await All().Where(a => a.Username == Constants.SystemUser).SingleOrDefaultAsync();
+    public async Task<Author> GetSystemUser() 
+        => await All()
+            .Where(a => a.Username == Constants.SystemUser)
+            .SingleOrDefaultAsync();
 }

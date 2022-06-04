@@ -15,7 +15,7 @@
             return {
                 id: this.comment.Id,
                 content: this.comment.Content,
-                author: this.comment.AuthorUsername
+                author: this.comment.AuthorUsername,
                 createdOn: this.post.CreatedOn,
                 modifiedOn: this.post.ModifiedOn
             }
