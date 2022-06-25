@@ -27,13 +27,13 @@
         },
         data() {
             return {
-                id: this.post.Id,
-                title: this.post.Title,
-                content: this.post.Content,
-                author: this.post.AuthorUsername,
-                createdOn: this.post.CreatedOn,
-                modifiedOn: this.post.ModifiedOn,
-                comments: this.post.Comments
+                id: this.post.id,
+                title: this.post.title,
+                content: this.post.content,
+                author: this.post.authorUsername,
+                createdOn: this.post.createdOn,
+                modifiedOn: this.post.modifiedOn,
+                comments: this.post.comments
             }
         }
     }

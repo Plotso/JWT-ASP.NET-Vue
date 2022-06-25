@@ -40,21 +40,18 @@ class IdentityService : IIdentityService
     {
         var user = await _userManager.FindByEmailAsync(userInput.Email);
         if (user == null)
-        {
             return InvalidErrorMessage;
-        }
 
         var passwordValid = await _userManager.CheckPasswordAsync(user, userInput.Password);
         if (!passwordValid)
-        {
             return InvalidErrorMessage;
-        }
 
         var roles = await _userManager.GetRolesAsync(user);
+        var isAdministrator = roles.Any(r => r == Constants.AdministratorRoleName);
 
         var token = _tokenGenerator.GenerateToken(user, roles);
 
-        return new UserOutputModel(token);
+        return new UserOutputModel(token, userInput.Email, isAdministrator);
     }
 
     public async Task<Result> ChangePassword(string userId, ChangePasswordInputModel changePasswordInput)

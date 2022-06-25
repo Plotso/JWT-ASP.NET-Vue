@@ -13,11 +13,11 @@
         },
         data() {
             return {
-                id: this.comment.Id,
-                content: this.comment.Content,
-                author: this.comment.AuthorUsername,
-                createdOn: this.post.CreatedOn,
-                modifiedOn: this.post.ModifiedOn
+                id: this.comment.id,
+                content: this.comment.content,
+                author: this.comment.authorUsername,
+                createdOn: this.post.createdOn,
+                modifiedOn: this.post.modifiedOn
             }
         }
     }

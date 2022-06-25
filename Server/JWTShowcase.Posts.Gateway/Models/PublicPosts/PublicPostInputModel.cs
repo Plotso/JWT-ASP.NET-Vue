@@ -2,7 +2,7 @@
 
 using System.ComponentModel.DataAnnotations;
 
-public class PublicPostInputModel
+public record PublicPostInputModel
 {
     [Required]
     public string Content { get; set; }

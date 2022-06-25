@@ -27,7 +27,7 @@ export const actions = {
         }
         
         PostsService.getPublicPosts()
-        .then(response => { return response; })
+        .then(response => { return response.data; })
         .then(resultJson => {
             commit('SET_PUBLIC_POSTS', resultJson.posts);
         })
@@ -42,7 +42,7 @@ export const actions = {
             commit('SET_PUBLIC_POSTS', resultJson.posts);
         })
         .catch(error => {
-            console.log('Public Posts Fetch Error: ', error);
+            console.log('Posts Fetch Error: ', error);
           });
     }
 }

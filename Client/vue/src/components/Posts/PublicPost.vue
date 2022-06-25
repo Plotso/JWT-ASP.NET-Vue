@@ -2,6 +2,7 @@
     <div>
         <div>
             <small>{{createdOn}}</small>
+            <br>
             <small>{{author}}</small>
             <p>{{content}}</p>
         </div>
@@ -9,7 +10,6 @@
 </template>
 
 <script>
-    import PostsService from '@/services/PostsService.js'
     export default {
         name: "PublicPost",
         props: {
@@ -17,16 +17,15 @@
         },
         data() {
             return {
-                id: this.post.Id,
-                content: this.post.Content,
-                author: this.post.AuthorUsername,
-                createdOn: this.post.CreatedOn,
-                modifiedOn: this.post.ModifiedOn
+                id: this.post.id,
+                content: this.post.content,
+                author: this.post.authorUsername,
+                createdOn: this.post.createdOn,
+                modifiedOn: this.post.modifiedOn
             }
         }
     }
 </script>
 
 <style scoped>
-
 </style>

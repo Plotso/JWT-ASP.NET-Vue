@@ -36,6 +36,10 @@ if (app.Environment.IsDevelopment() || app.Environment.IsEnvironment("Docker"))
     app.UseSwagger();
     app.UseSwaggerUI();
     app.UseDeveloperExceptionPage();
+    app.UseCors(options => options
+        .AllowAnyOrigin()
+        .AllowAnyHeader()
+        .AllowAnyMethod());
 }
 
 app.UseHttpsRedirection();
