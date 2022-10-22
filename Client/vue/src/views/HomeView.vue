@@ -42,6 +42,13 @@ export default {
       var publicPosts = this.$store.state.post.publicPosts;
       return publicPosts != undefined && publicPosts.length > 0
     }
+  },
+  mounted () {
+    this.$store.dispatch('post/fetchPublicPosts')
+    if(this.$store.state.authentication.isLoggedIn){
+      this.$store.dispatch('post/fetchPosts')
+    }
+    this.$forceUpdate();
   }
 }
 </script>

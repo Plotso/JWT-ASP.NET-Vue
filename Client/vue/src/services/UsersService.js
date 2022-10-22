@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const authApi = axios.create({  
-    baseURL: process.env.VUE_APP_JWTSHOWCASE_AUTH_API_ADDRESS,
+    baseURL: process.env.VUE_APP_JWTSHOWCASE_AUTH_API_ADDRESS_DOCKER, //VUE_APP_JWTSHOWCASE_AUTH_API_ADDRESS,
     withCredentials: false, // This is the default
     headers: {
         Accept: 'application/json',
@@ -19,7 +19,7 @@ export default{
             if(userData){
                 localStorage.setItem('tk_ex', JSON.stringify(userData));
             }
-
+            
             return userData;
         });
     },

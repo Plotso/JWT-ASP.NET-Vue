@@ -22,19 +22,19 @@ export const mutations = {
     START_AUTHENTICATION() {
         state.authenticationInProgress = true
     },
-    SET_LOGIN_DATA(user) {
+    SET_LOGIN_DATA(loginUserData) {
         state.isLoggedIn = true,
-        state.userData = user,
+        state.userData = loginUserData,
         state.authenticationInProgress = false
     },
     AUTHENTICATION_FAILURE() {
         state.isLoggedIn = false,
-        state.userData = null,
+        state.userData = {},
         state.authenticationInProgress = false
     },
     LOGOUT() {
         state.isLoggedIn = false,
-        state.userData = null,
+        state.userData = {},
         state.authenticationInProgress = false
     }
 }
@@ -44,7 +44,7 @@ export const actions = {
         UsersService.login(email, password)
             .then(
                 user => {
-                    commit('SET_LOGIN_DATA', user);
+                    commit('SET_LOGIN_DATA', JSON.stringify(user));
                     router.push('/');
                 },
                 error => {

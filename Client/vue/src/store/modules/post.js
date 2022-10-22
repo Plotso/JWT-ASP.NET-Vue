@@ -9,20 +9,26 @@ export const state = {
     accessToken: ""
 }
 
+export const getters = {
+    storePosts(state) {
+        return state.posts != undefined ? state.posts : [];
+    }
+}
+
 export const mutations = {
     SET_PUBLIC_POSTS(state, posts) {
         state.publicPosts = posts,
         state.lastFetchDate = new Date().toString();
     },
     SET_POSTS(state, posts) {
-        state.publicPosts = posts,
+        state.posts = posts,
         state.lastFetchDate = new Date().toString();
     }
 }
 
 export const actions = {
     fetchPublicPosts({commit}){
-        if(hasNHourPassedSinceLastFetch(0)){
+        if(state.publicPosts != undefined && state.publicPosts.length > 0 && hasNHourPassedSinceLastFetch(0)){
             return
         }
         
@@ -37,9 +43,9 @@ export const actions = {
     },
     fetchPosts({commit}){        
         PostsService.getPosts()
-        .then(response => { return response; })
+        .then(response => { return response.data; })
         .then(resultJson => {
-            commit('SET_PUBLIC_POSTS', resultJson.posts);
+            commit('SET_POSTS', resultJson.posts);
         })
         .catch(error => {
             console.log('Posts Fetch Error: ', error);

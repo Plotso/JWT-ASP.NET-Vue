@@ -7,6 +7,9 @@
             <p>{{content}}</p>
         </div>
         <div>
+            Comments:
+            <br/>
+            
             <div v-for="comment in comments" :key="comment.id">
                 <Comment :comment="comment"></Comment>
             </div>

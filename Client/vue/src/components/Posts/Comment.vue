@@ -1,6 +1,13 @@
 <template>
     <div>
-
+        <div>
+        <div>
+            <small>{{createdOn}}</small>
+            <small>{{modifiedOn}}</small>
+            <small>{{author}}</small>
+            <p>{{content}}</p>
+        </div>
+    </div>
     </div>
 </template>
 
@@ -16,8 +23,8 @@
                 id: this.comment.id,
                 content: this.comment.content,
                 author: this.comment.authorUsername,
-                createdOn: this.post.createdOn,
-                modifiedOn: this.post.modifiedOn
+                createdOn: this.comment.createdOn,
+                modifiedOn: this.comment.modifiedOn
             }
         }
     }

@@ -4,7 +4,6 @@
         <div v-for="post in posts" :key="post.id">
             <PublicPost :post="post"></PublicPost>
         </div>
-        TEST
     </div>
 </template>
 
