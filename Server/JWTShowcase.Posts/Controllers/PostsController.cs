@@ -48,7 +48,7 @@ public class PostsController : ApiController
     public async Task<ActionResult<PostOutputModel>> Get(int id)
     {
         var post = await _posts.Get(id);
-        return post != null ? post : BadRequest(Result.Failure("Post does not exist."));
+        return post != null ? post : NotFound(Result.Failure("Post does not exist."));
     }
 
     [HttpPost]
@@ -96,7 +96,7 @@ public class PostsController : ApiController
     {
         var post = await _posts.GetDbPost(id);
         if (post == null)
-            return BadRequest(Result.Failure($"No post found with {id}"));
+            return NotFound(Result.Failure($"No post found with {id}"));
         
         var author = await _authors.GetByUserId(_currentUser.UserId);
         if (!_currentUser.IsAdministrator && (author == null || post.Author.Username != author.Username))
@@ -117,7 +117,7 @@ public class PostsController : ApiController
     {
         var post = await _posts.Get(id);
         if (post == null)
-            return BadRequest(Result.Failure($"No post found with {id}"));
+            return NotFound(Result.Failure($"No post found with {id}"));
         
         var author = await _authors.GetByUserId(_currentUser.UserId);
         if (!_currentUser.IsAdministrator || author == null || post.AuthorUsername != author.Username)

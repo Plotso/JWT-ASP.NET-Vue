@@ -34,7 +34,7 @@ public class CommentsController : ApiController
     public async Task<ActionResult<CommentOutputModel>> Get(int id)
     {
         var comment = await _comments.Get(id);
-        return comment != null ? comment : BadRequest(Result.Failure("Comment does not exist."));
+        return comment != null ? comment : NotFound(Result.Failure("Comment does not exist."));
     }
 
     [HttpPost]
@@ -85,7 +85,7 @@ public class CommentsController : ApiController
     {
         var comment = await _comments.GetDbComment(id);
         if (comment == null)
-            return BadRequest(Result.Failure($"No comment found with {id}"));
+            return NotFound(Result.Failure($"No comment found with {id}"));
         
         var currentAuthor = await _authors.GetByUserId(_currentUser.UserId);
         if (!_currentUser.IsAdministrator && (currentAuthor == null || comment.Author.Username != currentAuthor.Username))
@@ -105,7 +105,7 @@ public class CommentsController : ApiController
     {
         var comment = await _comments.Get(id);
         if (comment == null)
-            return BadRequest(Result.Failure($"No comment found with {id}"));
+            return NotFound(Result.Failure($"No comment found with {id}"));
         
         var author = await _authors.GetByUserId(_currentUser.UserId);
         if (!_currentUser.IsAdministrator || author == null || comment.AuthorUsername != author.Username)

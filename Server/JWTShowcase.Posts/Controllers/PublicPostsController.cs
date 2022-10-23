@@ -78,7 +78,7 @@ public class PublicPostsController : ApiController
     {
         var post = await _publicPosts.GetDbPublicPost(id);
         if (post == null)
-            return BadRequest(Result.Failure($"No post found with {id}"));
+            return NotFound(Result.Failure($"No post found with {id}"));
         
         if (!_currentUser.IsAdministrator)
             return BadRequest(Result.Failure("Only admins can edit public posts content!"));
@@ -97,7 +97,7 @@ public class PublicPostsController : ApiController
     {
         var post = await _publicPosts.Get(id);
         if (post == null)
-            return BadRequest(Result.Failure($"No post found with {id}"));
+            return NotFound(Result.Failure($"No post found with {id}"));
         
         if (!_currentUser.IsAdministrator)
             return BadRequest(Result.Failure("Only admins can delete public posts!"));
