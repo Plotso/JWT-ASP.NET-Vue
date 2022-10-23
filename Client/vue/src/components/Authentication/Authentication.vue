@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container">
         <h2>{{authenticationType}}</h2>
         <form @submit.prevent="handleSubmit">
             <div class="form-group">
