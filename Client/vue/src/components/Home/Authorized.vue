@@ -1,10 +1,11 @@
 <template>
     <div>
         <div v-if="isAuthorized">            
-            <div>
-                Posts:
-                <div v-for="post in storePosts" :key="post.id">
-                    <Post :post="post"></Post>
+            <div class="text-center">
+                <div>
+                        <div v-for="post in storePosts" :key="post.id">
+                            <Post :post="post"></Post>
+                        </div>
                 </div>
             </div>
             <div v-if="loading">

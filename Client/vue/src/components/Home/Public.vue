@@ -1,8 +1,9 @@
 <template>
-    <div>
-        Public Posts:
-        <div v-for="post in posts" :key="post.id">
-            <PublicPost :post="post"></PublicPost>
+    <div class="text-center">
+        <div>
+                <div v-for="post in posts" :key="post.id">
+                    <p><PublicPost :post="post"></PublicPost></p>
+                </div>
         </div>
     </div>
 </template>
