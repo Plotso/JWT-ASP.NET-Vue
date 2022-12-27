@@ -2,11 +2,11 @@
     <div>
         <div class="card text-center">
             <div class="card-header greyish">
-                {{title}}
+                <router-link :to="{name: 'view post', params: {id: post.id}}">{{title}}</router-link> <i class="fa fa-external-link" aria-hidden="true"></i> 
+
             </div>
             <div class="card-body">
-                <h5 class="card-title"></h5>
-                <p class="card-text">{{content}}</p>
+                <p class="card-text">{{ $filters.str_limit(content,250) }}</p>
             </div>
             <div class="card-footer text-muted">
                 <i class="fa fa-user-circle-o" aria-hidden="true"></i>
@@ -17,33 +17,9 @@
                 <span>&nbsp &nbsp</span>
                 <i class="fa fa-calendar"></i>
                 Last modified: {{modifiedOnFormat}}
-            </div>
-            <br>
-            <div>
-                <div class="container">
-                    <div>
-                        <div id="accordion-comment">
-                            <div class="card">
-                            <div class="card-header" id="headingComment">
-                                <h5 class="mb-0">
-                                <button class="btn btn-link section-header" data-toggle="collapse" data-target="#collapseComment" aria-expanded="false" aria-controls="collapseComment">
-                                    <i class="fa fa-hand-o-right" aria-hidden="true"></i> Comments
-                                </button>
-                                </h5>
-                            </div>
-
-                            <div id="collapseComment" class="collapse show" aria-labelledby="headingComment" data-parent="#accordion-comment">
-                                <div class="card-body">                                          
-                                    <div v-for="comment in comments" :key="comment.id">
-                                        <Comment :comment="comment"></Comment>
-                                    </div>
-                                </div>
-                            </div>
-                            </div>
-                        </div>
-                    </div>
-
-            </div>
+                <span>&nbsp &nbsp</span>
+                <i class="fa fa-comment"></i>
+                Comments: {{comments.length}}
             </div>
         </div>
     </div>
@@ -85,7 +61,14 @@
 </script>
 
 <style scoped>
+
     .greyish {
         background-color: rgb(245, 253, 226);
+        font-size: 1.5rem;
+        color: #97d67c !important;
+    }
+
+    .greyish a {
+        color: #97d67c !important;
     }
 </style>

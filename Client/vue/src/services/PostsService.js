@@ -17,5 +17,17 @@ export default{
     getPosts(){ //ToDo: Add query logic
         const tkn = JSON.parse(localStorage.getItem('tk_ex')).token;
         return postsApi.get('/Posts/GetAll', {headers: { 'Authorization' : 'Bearer ' + tkn}});
+    },
+    create(postInputModel){
+        const tkn = JSON.parse(localStorage.getItem('tk_ex')).token;
+        return postsApi.post('/Posts/Create', postInputModel, {headers: { 'Authorization' : 'Bearer ' + tkn}});
+    },
+    update(id, postInputModel){        
+        const tkn = JSON.parse(localStorage.getItem('tk_ex')).token;
+        return postsApi.post('/Posts/Edit', {id, postInputModel}, {headers: { 'Authorization' : 'Bearer ' + tkn}});
+    },
+    delete(id){
+        const tkn = JSON.parse(localStorage.getItem('tk_ex')).token;
+        return postsApi.post('/Posts/Delete', id, {headers: { 'Authorization' : 'Bearer ' + tkn}});
     }
 }

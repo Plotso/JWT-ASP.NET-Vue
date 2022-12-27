@@ -2,6 +2,11 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import LoginView from '../views/LoginView.vue'
 import RegisterView from '../views/RegisterView.vue'
+import PostView from '../views/Post/PostView.vue'
+import PostCreateView from '../views/Post/CRUD/PostCreateView.vue'
+import PostUpdateView from '../views/Post/CRUD/PostUpdateView.vue'
+import PostDeleteView from '../views/Post/CRUD/PostDeleteView.vue'
+
 
 const routes = [
   {
@@ -32,6 +37,29 @@ const routes = [
     name: 'register',
     component: RegisterView
   },
+  {
+    path: '/post/:id',
+    name: 'view post',
+    component: PostView,
+    props: true
+  },
+  {
+    path: '/post/create',
+    name: 'create post',
+    component: PostCreateView
+  },
+  {
+    path: '/post/edit/:id',
+    name: 'edit post',
+    component: PostUpdateView,
+    props: true
+  },
+  {
+    path: '/post/delete/:id',
+    name: 'delete post',
+    component: PostDeleteView,
+    props: true
+  }
 ]
 
 const router = createRouter({

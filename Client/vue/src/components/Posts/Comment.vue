@@ -2,7 +2,7 @@
     <div>        
         <div class="card text-center">
             <div class="card-header blueish">
-                {{author}}
+                <i class="fa fa-user-circle-o" aria-hidden="true"></i> {{author}} 
             </div>
             <div class="card-body">
                 <h5 class="card-title"></h5>

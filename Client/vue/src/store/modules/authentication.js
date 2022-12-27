@@ -44,7 +44,7 @@ export const actions = {
         UsersService.login(email, password)
             .then(
                 user => {
-                    commit('SET_LOGIN_DATA', JSON.stringify(user));
+                    commit('SET_LOGIN_DATA', user);
                     router.push('/');
                 },
                 error => {
@@ -57,7 +57,9 @@ export const actions = {
         UsersService.register(email, password)
             .then(
                 user => {
-                    commit('SET_LOGIN_DATA', user);
+                    var stringified = JSON.stringify(user);
+                    const userData = JSON.parse(stringified);
+                    commit('SET_LOGIN_DATA', JSON.stringify(user));
                     router.push('/');
                 },
                 error => {
