@@ -24,6 +24,9 @@ public class PublicPostsService : DataService<PublicPost>, IPublicPostsService
             .ProjectTo<PublicPostOutputModel>(All().Where(p => p.Id == id))
             .SingleOrDefaultAsync();
 
+    public async Task<PublicPost> GetDbPublicPost(int id) 
+        => await All().SingleOrDefaultAsync(p => p.Id == id);
+
     public async Task<bool> Delete(int id)
     {
         var post = await Data.FindAsync<PublicPost>(id);

@@ -21,6 +21,9 @@ public class CommentsService : DataService<Comment>, ICommentsService
             .ProjectTo<CommentOutputModel>(All().Where(p => p.Id == id))
             .SingleOrDefaultAsync();
 
+    public async Task<Comment> GetDbComment(int id)
+        => await All().SingleOrDefaultAsync(p => p.Id == id);
+
     public async Task<bool> Delete(int id)
     {
         var comment = await Data.FindAsync<Comment>(id);

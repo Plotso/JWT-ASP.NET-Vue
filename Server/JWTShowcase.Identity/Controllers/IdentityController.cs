@@ -31,7 +31,7 @@ public class IdentityController : ApiController
     public async Task<ActionResult<UserOutputModel>> Login(UserInputModel input)
     {
         var result = await _identity.Login(input);
-        return result.Succeeded ? new UserOutputModel(result.Data.Token) : BadRequest(result.Errors);
+        return result.Succeeded ? result.Data : BadRequest(result.Errors);
     }
 
     [HttpPut]

@@ -3,7 +3,7 @@
 using System.ComponentModel.DataAnnotations;
 using static Data.DataConstants.Comments;
 
-public class CommentInputModel
+public record CommentInputModel
 {
     [Required]
     [MinLength(MinContentLength)]

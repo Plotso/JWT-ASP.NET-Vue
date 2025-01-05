@@ -7,7 +7,7 @@ using static Constants;
 
 public interface IPostsService
 {
-    [Get("/Posts")]
+    [Get("/Posts/GetAll")]
     Task<PostsOutputModel> GetAll();
     
     [Get("/Posts/{id}")]

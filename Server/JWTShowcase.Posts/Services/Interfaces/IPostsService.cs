@@ -14,6 +14,8 @@ public interface IPostsService : IDataService<Post>
 
     Task<PostOutputModel> Get(int id);
 
+    Task<Post> GetDbPost(int id);
+
     Task<bool> Delete(int id);
 
     Task<bool> DeletePermanently(int id);

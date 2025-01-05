@@ -2,7 +2,8 @@
 
 using System.ComponentModel.DataAnnotations;
 using static Data.DataConstants.Posts;
-public class PublicPostInputModel
+
+public record PublicPostInputModel
 {
     [Required]
     [MinLength(MinContentLength)]
